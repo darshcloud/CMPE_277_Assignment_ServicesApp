@@ -15,6 +15,7 @@ import android.os.IBinder;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+import android.widget.EditText;
 
 public class MainActivity extends Activity {
 
@@ -22,12 +23,20 @@ public class MainActivity extends Activity {
 	private MyService serviceBinder;
 	Intent i;
 	Button btnDownload;
+	EditText editTextPDF1, editTextPDF2, editTextPDF3, editTextPDF4, editTextPDF5;
+	String url1, url2, url3, url4, url5;
 
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
+
+		editTextPDF1 = (EditText) findViewById(R.id.enterpdf1);
+		editTextPDF2 = (EditText) findViewById(R.id.enterpdf2);
+		editTextPDF3 = (EditText) findViewById(R.id.enterpdf3);
+		editTextPDF4 = (EditText) findViewById(R.id.enterpdf4);
+		editTextPDF5 = (EditText) findViewById(R.id.enterpdf5);
 
 		//---intent to filter for file downloaded intent---
 		intentFilter = new IntentFilter();
@@ -41,13 +50,18 @@ public class MainActivity extends Activity {
 			public void onClick(View v) {
 				// DEMO 1
 				Intent intent = new Intent(getBaseContext(), MyService.class);
+				url1 = editTextPDF1.getText().toString();
+				url2 = editTextPDF2.getText().toString();
+				url3 = editTextPDF3.getText().toString();
+				url4 = editTextPDF4.getText().toString();
+				url5 = editTextPDF5.getText().toString();
 				try {
 					URL[] urls = new URL[] {
-							new URL("https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/45530.pdf"),
-							new URL("https://hadoop.apache.org/docs/r1.2.1/hdfs_design.pdf"),
-							new URL("https://pages.databricks.com/rs/094-YMS-629/images/LearningSpark2.0.pdf"),
-							new URL("https://docs.aws.amazon.com/wellarchitected/latest/machine-learning-lens/wellarchitected-machine-learning-lens.pdf"),
-							new URL("https://developers.snowflake.com/wp-content/uploads/2020/09/SNO-eBook-7-Reference-Architectures-for-Application-Builders-MachineLearning-DataScience.pdf")
+							new URL(url1),
+							new URL(url2),
+							new URL(url3),
+							new URL(url4),
+							new URL(url5)
 					};
 					intent.putExtra("URLs", urls);
 
